@@ -143,11 +143,11 @@ const Link8Page: React.FC = () => {
       {activeTab === 'subscription' && (
   <div style={{ border: '1px solid #ccc', padding: '15px', borderRadius: '5px' }}>
    <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>Subscription Details</h2>
-    <ul>
-      <li>Current plan: Description</li>
-      <li>Monthly quota: Description</li>
-      <li>Remaining quota: Description</li>
-      <li>Quota resets on Description</li>
+    <ul style={{marginTop:'10px',}}>
+      <li>Current plan <span style={{ marginLeft: '33px' }}>:Description</span></li>
+      <li>Monthly quota<span style={{ marginLeft: '21px' }}>:Description</span></li>
+      <li>Remaining quota<span style={{ marginLeft: '6px' }}>:Description</span></li>
+      <li>Quota resets on<span style={{ marginLeft: '14px' }}>:Description</span></li>
     </ul>
 
     <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>

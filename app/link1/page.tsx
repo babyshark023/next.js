@@ -1,7 +1,7 @@
 const Link1Page = () => {
   return (
     <div style={{ marginLeft: '300px', marginTop: '50px' }}>
-      <h1 style={{ fontWeight: 'bold', fontSize: '35px', color: 'black' }}>
+    <h1 style={{ fontWeight: 'bold', fontSize: '35px', color: 'black' }}>
         Email Templates
       </h1>
       <button
