@@ -4,11 +4,12 @@ import Logo from "./Logo";
 import SignOut from "./SignOut";
 import Support from "./Support";
 import Menu from "./Menu";
-import Sidebar from "../Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
+
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between gap-3 md:gap-10 h-16 bg-[#3f599e]">
+    <div className="flex items-center justify-between gap-3 md:gap-10 h-16 bg-[#464c5c]">
       <Logo />
       <Account />
       <Docs />
@@ -16,6 +17,7 @@ const Navbar = () => {
       <SignOut />
       <Menu />
       <Sidebar />
+     
     </div>
   );
 };

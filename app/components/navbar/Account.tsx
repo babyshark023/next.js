@@ -1,9 +1,11 @@
-
+import Link from 'next/link';
 
 const Account = () => {
   return (
-    <div className="hidden md:flex mr-6 text-white">Account</div>
-  )
-}
+    <Link href="/account" className="hidden md:flex mr-6 text-white">
+      Account
+    </Link>
+  );
+};
 
-export default Account
+export default Account;

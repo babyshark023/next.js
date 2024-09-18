@@ -1,9 +1,11 @@
-
+import Link from 'next/link';
 
 const SignOut = () => {
   return (
-    <div className="hidden md:flex mr-6 text-white">SignOut</div>
-  )
-}
+    <Link href="/signout" className="hidden md:flex mr-6 text-white">
+      SignOut
+    </Link>
+  );
+};
 
-export default SignOut
+export default SignOut;

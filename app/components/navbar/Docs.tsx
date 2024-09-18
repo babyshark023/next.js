@@ -1,9 +1,11 @@
-
+import Link from 'next/link';
 
 const Docs = () => {
   return (
-    <div className="hidden md:flex mr-6 text-white">Docs</div>
-  )
-}
+    <Link href="/docs" className="hidden md:flex mr-6 text-white">
+      Docs
+    </Link>
+  );
+};
 
-export default Docs
+export default Docs;
