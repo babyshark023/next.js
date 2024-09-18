@@ -2,7 +2,7 @@ const Link1Page = () => {
   return (
     <div style={{ marginLeft: '300px', marginTop: '50px' }}>
       <h1 style={{ fontWeight: 'bold', fontSize: '35px', color: 'black' }}>
-        Email Services
+        Email Templates
       </h1>
       <button
         style={{
@@ -26,7 +26,7 @@ const Link1Page = () => {
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
         </svg>
-        Add New Service
+       Create New Service
       </button>
       <p style={{ marginTop: '10px', fontSize: '14px', color: 'gray' }}>
       

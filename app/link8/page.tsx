@@ -37,13 +37,13 @@ const Link8Page: React.FC = () => {
       <h1 style={{ fontWeight: 'bold', fontSize: '35px', color: 'black' }}>
         Team Members
       </h1>
-      <section className="_wrapper_13eh8_1" style={{ display: 'flex', gap: '50px', fontSize: '17px' }}>
+      <section className="_wrapper_13eh8_1" style={{ display: 'flex', gap: '12px', fontSize: '17px' }}>
         <button
           tabIndex={-1}
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'general' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('general')}
-          style={{ backgroundColor: 'black', color: 'white' }}
+          style={{ backgroundColor: '#28a745', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px' }}
         >
           <span>General</span>
         </button>
@@ -52,7 +52,7 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'subscription' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('subscription')}
-          style={{ backgroundColor: 'black', color: 'white' }}
+          style={{ backgroundColor: '#28a745', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
         >
           <span>Subscription</span>
         </button>
@@ -61,7 +61,7 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'invoices' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('invoices')}
-          style={{ backgroundColor: 'black', color: 'white' }}
+          style={{ backgroundColor: '#28a745', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
         >
           <span>Invoices</span>
         </button>
@@ -70,7 +70,7 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'security' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('security')}
-          style={{ backgroundColor: 'black', color: 'white' }}
+          style={{ backgroundColor: '#28a745', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
         >
           <span>Security</span>
         </button>
@@ -78,10 +78,10 @@ const Link8Page: React.FC = () => {
 
       <div style={{ marginTop: '20px' }}>
         {activeTab === 'general' && (
-          <div style={{ border: '1px solid #ccc', padding: '15px', borderRadius: '5px' }}>
-            <h2>API Keys</h2>
+           <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px',marginRight:'50px' }}>
+           <h2 style={{ fontWeight: 'bold', fontSize:'20px' }}>API Keys</h2>
             <div style={{ marginBottom: '10px' }}>
-              <span style={{ fontWeight: 'bold', marginRight: '10px' }}>Public Key:</span>
+              <span style={{marginRight: '10px' }}>Public Key:</span>
               <input
                 type="text"
                 placeholder="Enter your public key..."
@@ -97,7 +97,7 @@ const Link8Page: React.FC = () => {
               />
             </div>
             <div style={{ marginBottom: '10px' }}>
-              <span style={{ fontWeight: 'bold', marginRight: '10px' }}>Private Key:</span>
+              <span style={{ marginRight: '10px' }}>Private Key:</span>
               <input
                 type="text"
                 placeholder="Enter your private key..."
@@ -140,23 +140,59 @@ const Link8Page: React.FC = () => {
             </button>
           </div>
         )}
-        
-        {activeTab === 'subscription' && (
-          <div>
-            <p>Subscription content goes here.</p>
-          </div>
-        )}
+      {activeTab === 'subscription' && (
+  <div style={{ border: '1px solid #ccc', padding: '15px', borderRadius: '5px' }}>
+   <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>Subscription Details</h2>
+    <ul>
+      <li>Current plan: Description</li>
+      <li>Monthly quota: Description</li>
+      <li>Remaining quota: Description</li>
+      <li>Quota resets on Description</li>
+    </ul>
+
+    <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
+      <button
+        style={{
+          padding: '10px 15px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+        onClick={() => console.log('Upgrade clicked')}
+      >
+        Upgrade
+      </button>
+      <button
+        style={{
+          padding: '10px 15px',
+          backgroundColor: '#dc3545',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+        onClick={() => console.log('Cancel clicked')}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+)}
+
 
         {activeTab === 'invoices' && (
-          <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px' }}>
-            <h2>Billing History</h2>
+           <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px',marginRight:'50px' }}>
+            <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>Billing History</h2>
             <p className='text-center'>Your invoices will appear here</p>
           </div>
         )}
 
         {activeTab === 'security' && (
           <div>
-            <h2>Domains</h2>
+      <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px',marginRight:'50px' }}>
+      <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>Domains</h2>
             <p>Your requests are restricted to the domains listed below</p>
             <div>
               {domains.length === 0 ? (
@@ -171,7 +207,7 @@ const Link8Page: React.FC = () => {
             </div>
 
             {/* İlk Domain Ekleme Bölümü */}
-            <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px' }}>
+          
               <h3>Add New Domain</h3>
               <input
                 type="text"
@@ -226,8 +262,9 @@ const Link8Page: React.FC = () => {
             </div>
 
             {/* İkinci Domain Ekleme Bölümü */}
-            <div style={{ marginBottom: '20px' }}>
-              <h3>API Settings</h3>
+            <div >
+            <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px',marginRight:'50px' }}>
+            <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>API Settings</h2>
 
               {/* İlk Checkbox */}
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
@@ -271,6 +308,7 @@ const Link8Page: React.FC = () => {
                 Save Changes
               </button>
             </div>
+          </div>
           </div>
         )}
       </div>
