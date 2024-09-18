@@ -35,7 +35,7 @@ const Link8Page: React.FC = () => {
   return (
     <div style={{ marginLeft: '300px', marginTop: '50px' }}>
       <h1 style={{ fontWeight: 'bold', fontSize: '35px', color: 'black' }}>
-        Team Members
+        Account
       </h1>
       <section className="_wrapper_13eh8_1" style={{ display: 'flex', gap: '12px', fontSize: '17px' }}>
         <button
