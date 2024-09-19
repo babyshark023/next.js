@@ -1,4 +1,4 @@
-'use client'; // Client Component olarak tanımlamak için
+'use client'; 
 
 import React from 'react';
 
@@ -19,7 +19,7 @@ const Link6Page: React.FC = () => {
         </select>
         <button style={styles.updateButton} onClick={handleRefresh}>
           <img
-            src="reload.png" // İkonun yolu
+            src="reload.png" 
             alt="Reload"
             style={styles.icon}
           />
@@ -67,7 +67,7 @@ const styles: { [key: string]: React.CSSProperties } = {
    
   },
   icon: {
-    width: '16px', // İkon boyutu
+    width: '16px',
     height: '16px',
   },
 };

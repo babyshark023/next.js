@@ -1,9 +1,9 @@
-'use client'; // Client Component olarak tanımlamak için
+'use client';
 import React, { useState } from 'react';
 
 const TeamMembersPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('profile');
-  const [userName, setUserName] = useState(''); // Kullanıcı adını tutmak için
+  const [userName, setUserName] = useState(''); 
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -12,13 +12,13 @@ const TeamMembersPage: React.FC = () => {
   };
 
   const handleSaveUserName = () => {
-    // Kullanıcı adı kaydetme işlemi burada yapılacak
+  
     console.log('Kullanıcı Adı:', userName);
-    setUserName(''); // Kaydettikten sonra input'u temizle
+    setUserName(''); 
   };
 
   const handleRefreshKeys = () => {
-    // Refresh keys işlemi burada yapılacak
+
   };
 
   return (
@@ -138,7 +138,7 @@ const TeamMembersPage: React.FC = () => {
   <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px', marginRight: '50px' }}>
     <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>Multi-Factor Authentication</h2>
     <p>Having multi-factor authentication (MFA) for the user improves security for this account.</p>
-    {/* Güvenlik ayarları burada eklenebilir */}
+   
 
     <button
       style={{

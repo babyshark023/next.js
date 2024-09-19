@@ -1,4 +1,4 @@
-'use client'; // Client Component olarak tanımlamak için
+'use client'; 
 
 import React from 'react';
 
@@ -26,11 +26,26 @@ const Link3Page: React.FC = () => {
           />
           <button style={styles.updateButton} onClick={handleRefresh}>
             <img
-              src="reload.png" // İkonun yolu
+              src="reload.png" 
               alt="Reload"
               style={styles.icon}
             />
           </button>
+        </div>
+      </div>
+
+      <div style={styles.tableContainer}>
+        <div style={styles.headersContainer}>
+          <div style={styles.headerColumn}>Email</div>
+          <div style={styles.headerColumn}>Template</div>
+        </div>
+       
+        <div style={styles.noDataContainer}>
+          <h4 style={styles.noDataTitle}>The suppression list is empty</h4>
+          <p style={styles.noDataText}>
+            In the suppression list, you will see the populated suppressions from requests.<br />
+            For more information, please check the Suppression Documentation.
+          </p>
         </div>
       </div>
     </div>
@@ -76,7 +91,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
   },
   includeLabel: {
-    marginRight: '10px', // Input ile etiket arasındaki boşluk
+    marginRight: '10px',
     fontSize: '14px',
   },
   updateButton: {
@@ -90,8 +105,36 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
   },
   icon: {
-    width: '16px', // İkon boyutu
+    width: '16px',
     height: '16px',
+  },
+  tableContainer: {
+    marginTop: '20px',
+    borderCollapse: 'collapse',
+    width: '100%',
+  },
+  headersContainer: {
+    display: 'flex',
+    fontWeight: 'bold',
+    borderBottom: '2px solid #ccc',
+  },
+  headerColumn: {
+    flex: 1,
+    padding: '10px',
+    textAlign: 'center',
+    backgroundColor: '#f0f0f0',
+  },
+  noDataContainer: {
+    padding: '20px',
+    textAlign: 'center',
+    color: '#666',
+  },
+  noDataTitle: {
+    fontWeight: 'bold',
+    fontSize: '18px',
+  },
+  noDataText: {
+    fontSize: '14px',
   },
 };
 

@@ -1,4 +1,4 @@
-'use client'; // Client Component olarak tanımlamak için
+'use client'; 
 
 import React, { useState } from 'react';
 
@@ -206,7 +206,6 @@ const Link8Page: React.FC = () => {
               )}
             </div>
 
-            {/* İlk Domain Ekleme Bölümü */}
           
               <h3>Add New Domain</h3>
               <input
@@ -261,12 +260,10 @@ const Link8Page: React.FC = () => {
               </button>
             </div>
 
-            {/* İkinci Domain Ekleme Bölümü */}
             <div >
             <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px',marginRight:'50px' }}>
             <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>API Settings</h2>
 
-              {/* İlk Checkbox */}
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                 <input type="checkbox" id="option1" />
                 <label htmlFor="option1" style={{ marginLeft: '10px' }}>
@@ -274,7 +271,6 @@ const Link8Page: React.FC = () => {
                 </label>
               </div>
 
-              {/* İkinci Checkbox */}
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                 <input type="checkbox" id="option2" />
                 <label htmlFor="option2" style={{ marginLeft: '10px' }}>

@@ -1,4 +1,4 @@
-'use client'; // Client Component olarak tanımlamak için
+'use client'; 
 
 import React from 'react';
 
@@ -19,11 +19,22 @@ const Link5Page: React.FC = () => {
         </select>
         <button style={styles.updateButton} onClick={handleRefresh}>
           <img
-            src="reload.png" // İkonun yolu
+            src="reload.png" 
             alt="Reload"
             style={styles.icon}
           />
         </button>
+      </div>
+
+      <div style={styles.headersContainer}>
+        <div style={styles.headerColumn}>Created</div>
+        <div style={styles.headerColumn}>API</div>
+        <div style={styles.headerColumn}>Status</div>
+        <div style={styles.headerColumn}>Response</div>
+      </div>
+      
+      <div style={styles.noDataContainer}>
+        <h4 style={styles.noDataTitle}>The event list is empty</h4>
       </div>
     </div>
   );
@@ -64,11 +75,34 @@ const styles: { [key: string]: React.CSSProperties } = {
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
-   
   },
   icon: {
-    width: '16px', // İkon boyutu
+    width: '16px', 
     height: '16px',
+  },
+  headersContainer: {
+    display: 'flex',
+    fontWeight: 'bold',
+    borderBottom: '2px solid #ccc',
+    marginTop: '20px',
+  },
+  headerColumn: {
+    flex: 1,
+    padding: '10px',
+    textAlign: 'center',
+    backgroundColor: '#f0f0f0',
+  },
+  noDataContainer: {
+    marginTop: '20px',
+    textAlign: 'center',
+    color: '#666',
+  },
+  noDataTitle: {
+    fontWeight: 'bold',
+    fontSize: '20px',
+  },
+  noDataText: {
+    fontSize: '14px',
   },
 };
 
