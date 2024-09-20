@@ -1,39 +1,35 @@
-const Link1Page = () => {
+'use client'; // Client component olduğunu belirt
+
+import React from 'react';
+import { useRouter } from 'next/navigation';
+
+const Link1Page: React.FC = () => {
+  const router = useRouter(); // Router'ı burada kullanıyoruz
+
+  const handleCreateTemplate = () => {
+    // Yeni sayfaya yönlendir
+    router.push('/create-template'); // Yeni sayfaya yönlendir
+  };
+
   return (
     <div style={{ marginLeft: '300px', marginTop: '50px' }}>
-    <h1 style={{ fontWeight: 'bold', fontSize: '35px', color: 'black' }}>
+      <h1 style={{ fontWeight: 'bold', fontSize: '35px', color: 'black' }}>
         Email Templates
       </h1>
       <button
+        onClick={handleCreateTemplate}
         style={{
-          marginTop: '20px',
           padding: '5px 12px',
           fontSize: '16px',
           color: 'white',
           backgroundColor: '#464c5c',
-          display: 'flex',
-          alignItems: 'center',
-          borderRadius: '6px', 
+          borderRadius: '6px',
+          marginTop: '20px',
         }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          style={{ width: '20px', height: '14px', marginRight: '8px' }}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-        </svg>
-       Create New Service
+        Create New Template
       </button>
-      <p style={{ marginTop: '10px', fontSize: '14px', color: 'gray' }}>
-      
-      </p>
     </div>
-    
-    
   );
 };
 
