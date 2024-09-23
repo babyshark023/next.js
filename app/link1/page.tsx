@@ -1,14 +1,13 @@
-'use client'; // Client component olduğunu belirt
+'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; 
 
 const Link1Page: React.FC = () => {
-  const router = useRouter(); // Router'ı burada kullanıyoruz
+  const router = useRouter(); 
 
   const handleCreateTemplate = () => {
-    // Yeni sayfaya yönlendir
-    router.push('/create-template'); // Yeni sayfaya yönlendir
+    router.push('/create-template'); // Yönlendirme
   };
 
   return (

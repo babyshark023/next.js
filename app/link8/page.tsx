@@ -140,6 +140,7 @@ const Link8Page: React.FC = () => {
             </button>
             
           </div>
+          
         )}
       {activeTab === 'subscription' && (
   <div style={{ border: '1px solid #ccc', padding: '15px', borderRadius: '5px' }}>

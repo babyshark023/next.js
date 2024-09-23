@@ -1,21 +1,64 @@
-'use client'; 
+'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Link3Page: React.FC = () => {
+  const [isDeleteDisabled, setIsDeleteDisabled] = useState(true);
+  const [templates, setTemplates] = useState<string[]>([]); // Şablonlar için state
+  const [selectedTemplate, setSelectedTemplate] = useState<string>(''); // Seçilen şablon için state
+  const [suppressions, setSuppressions] = useState<{ email: string; template: string }[]>([]); // Suppressions için state
+  const [loading, setLoading] = useState(true);
+
+  // API'den veri çekme fonksiyonu
+  const fetchTemplates = async () => {
+    try {
+      const response = await fetch('/api/templates'); // API endpoint'ini güncelleyin
+      const data = await response.json();
+      setTemplates(data.templates); // API'den gelen şablonları state'e kaydediyoruz
+    } catch (error) {
+      console.error('API verisi alınamadı:', error);
+    }
+  };
+
+  // Suppressions için veri çekme fonksiyonu
+  const fetchSuppressions = async () => {
+    try {
+      const response = await fetch('/api/suppressions'); // Suppressions API endpoint'i
+      const data = await response.json();
+      setSuppressions(data.suppressions); // API'den gelen suppressions'ı state'e kaydediyoruz
+    } catch (error) {
+      console.error('Suppressions verisi alınamadı:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTemplates(); // Bileşen yüklendiğinde API'den veriyi çeker
+    fetchSuppressions(); // Suppressions verisini çeker
+  }, []);
+
   const handleRefresh = () => {
     window.location.reload();
+  };
+
+  const handleDelete = () => {
+    console.log('Silme işlemi gerçekleştirildi.'); 
   };
 
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>Suppressions</h1>
       <div style={styles.dropdownContainer}>
-        <select style={styles.dropdown}>
-          <option value="">All History</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+        <select 
+          style={styles.dropdown} 
+          value={selectedTemplate} 
+          onChange={(e) => setSelectedTemplate(e.target.value)} // Seçim değiştiğinde state'i güncelle
+        >
+          <option value="">All Templates</option>
+          {templates.map((template, index) => (
+            <option key={index} value={template}>{template}</option>
+          ))}
         </select>
         <div style={styles.searchContainer}>
           <span style={styles.includeLabel}>Email:</span>
@@ -31,6 +74,20 @@ const Link3Page: React.FC = () => {
               style={styles.icon}
             />
           </button>
+          <button
+            style={{
+              ...styles.deleteButton,
+              cursor: isDeleteDisabled ? 'not-allowed' : 'pointer',
+            }}
+            onClick={isDeleteDisabled ? undefined : handleDelete}
+            disabled={isDeleteDisabled}
+          >
+            <img
+              src="/icons/trash.png" 
+              alt="Delete"
+              style={styles.icon}
+            />
+          </button>
         </div>
       </div>
 
@@ -39,14 +96,27 @@ const Link3Page: React.FC = () => {
           <div style={styles.headerColumn}>Email</div>
           <div style={styles.headerColumn}>Template</div>
         </div>
-       
-        <div style={styles.noDataContainer}>
-          <h4 style={styles.noDataTitle}>The suppression list is empty</h4>
-          <p style={styles.noDataText}>
-            In the suppression list, you will see the populated suppressions from requests.<br />
-            For more information, please check the Suppression Documentation.
-          </p>
-        </div>
+        
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          suppressions.length === 0 ? (
+            <div style={styles.noDataContainer}>
+              <h4 style={styles.noDataTitle}>The suppression list is empty</h4>
+              <p style={styles.noDataText}>
+                In the suppression list, you will see the populated suppressions from requests.<br />
+                For more information, please check the Suppression Documentation.
+              </p>
+            </div>
+          ) : (
+            suppressions.map((suppression, index) => (
+              <div key={index} style={styles.headersContainer}>
+                <div style={styles.headerColumn}>{suppression.email}</div>
+                <div style={styles.headerColumn}>{suppression.template}</div>
+              </div>
+            ))
+          )
+        )}
       </div>
     </div>
   );
@@ -107,6 +177,17 @@ const styles: { [key: string]: React.CSSProperties } = {
   icon: {
     width: '16px',
     height: '16px',
+  },
+  deleteButton: {
+    marginLeft: '5px',
+    padding: '5px',
+    borderRadius: '4px',
+    border: '1px solid #ccc',
+    backgroundColor: 'white',
+    color: 'white',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
   },
   tableContainer: {
     marginTop: '20px',

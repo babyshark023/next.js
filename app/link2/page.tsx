@@ -1,11 +1,101 @@
-'use client'; 
+'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+interface History {
+  id: string;
+  name: string;
+}
+
+interface Template {
+  id: string;
+  name: string;
+}
+
+interface Service {
+  id: string;
+  name: string;
+}
+
+interface Email {
+  created: string;
+  result: string;
+  service: string;
+  template: string;
+  resends: number;
+}
 
 const Link2Page: React.FC = () => {
+  const [emailHistory, setEmailHistory] = useState<Email[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredEmailHistory, setFilteredEmailHistory] = useState<Email[]>([]);
+  const [histories, setHistories] = useState<History[]>([]);
+  const [templates, setTemplates] = useState<Template[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
+
   const handleRefresh = () => {
     window.location.reload();
   };
+
+  const fetchEmailHistory = async () => {
+    try {
+      const response = await fetch('/api/getEmailHistory');
+      if (!response.ok) {
+        throw new Error('Veri alınamadı.');
+      }
+      const data: Email[] = await response.json();
+      setEmailHistory(data);
+      setFilteredEmailHistory(data);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Bir hata oluştu.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchOptions = async () => {
+    try {
+      const historiesResponse = await fetch('/api/getHistories');
+      const templatesResponse = await fetch('/api/getTemplates');
+      const servicesResponse = await fetch('/api/getServices');
+
+      const historiesData = await historiesResponse.json();
+      const templatesData = await templatesResponse.json();
+      const servicesData = await servicesResponse.json();
+
+      setHistories(historiesData);
+      setTemplates(templatesData);
+      setServices(servicesData);
+    } catch (error: unknown) {
+      console.error('Veri alınamadı:', error);
+    }
+  };
+
+  const handleSearch = () => {
+    const filtered = emailHistory.filter(email => 
+      email.result.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      email.service.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      email.template.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredEmailHistory(filtered);
+  };
+
+  const handleDelete = () => {
+    console.log('Silme işlemi gerçekleştirildi.');
+  };
+
+  const isDeleteDisabled = filteredEmailHistory.length === 0;
+
+  useEffect(() => {
+    fetchEmailHistory();
+    fetchOptions();
+  }, []);
 
   return (
     <div style={styles.container}>
@@ -13,21 +103,21 @@ const Link2Page: React.FC = () => {
       <div style={styles.dropdownContainer}>
         <select style={styles.dropdown}>
           <option value="">All History</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          {histories.map((history) => (
+            <option key={history.id} value={history.id}>{history.name}</option>
+          ))}
         </select>
         <select style={styles.dropdown}>
           <option value="">All Templates</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          {templates.map((template) => (
+            <option key={template.id} value={template.id}>{template.name}</option>
+          ))}
         </select>
         <select style={styles.dropdown}>
           <option value="">All Services</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          {services.map((service) => (
+            <option key={service.id} value={service.id}>{service.name}</option>
+          ))}
         </select>
         <div style={styles.searchContainer}>
           <span style={styles.includeLabel}>Include:</span>
@@ -35,35 +125,57 @@ const Link2Page: React.FC = () => {
             type="text"
             placeholder="Search..."
             style={styles.input}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <button style={styles.updateButton} onClick={handleSearch}>
+            <img src="/icons/search.png" alt="search" style={styles.icon} />
+          </button>
           <button style={styles.updateButton} onClick={handleRefresh}>
-            <img
-              src="reload.png" 
-              alt="Reload"
-              style={styles.icon}
-            />
+            <img src="reload.png" alt="Reload" style={styles.icon} />
+          </button>
+          <button
+            style={{
+              ...styles.deleteButton,
+              cursor: isDeleteDisabled ? 'not-allowed' : 'pointer',
+            }}
+            onClick={isDeleteDisabled ? undefined : handleDelete}
+            disabled={isDeleteDisabled}
+          >
+            <span style={styles.deleteIcon} />
           </button>
         </div>
       </div>
 
-    
-      <div style={styles.tableContainer}>
-        <div style={styles.headersContainer}>
-          <div style={styles.headerColumn}>Created</div>
-          <div style={styles.headerColumn}>Result</div>
-          <div style={styles.headerColumn}>Service</div>
-          <div style={styles.headerColumn}>Template</div>
-          <div style={styles.headerColumn}>Resends</div>
+     
+        <div style={styles.tableContainer}>
+          <div style={styles.headersContainer}>
+            <div style={styles.headerColumn}>Created</div>
+            <div style={styles.headerColumn}>Result</div>
+            <div style={styles.headerColumn}>Service</div>
+            <div style={styles.headerColumn}>Template</div>
+            <div style={styles.headerColumn}>Resends</div>
+          </div>
+          {filteredEmailHistory.length === 0 ? (
+            <div style={styles.noDataContainer}>
+              <h4 style={styles.noDataTitle}>The email history is empty</h4>
+              <p style={styles.noDataText}>
+                In the email history, you will see the populated emails from requests.<br />
+                For more information, please check the Email Documentation.
+              </p>
+            </div>
+          ) : (
+            filteredEmailHistory.map((email, index) => (
+              <div key={index} style={styles.headersContainer}>
+                <div style={styles.headerColumn}>{email.created}</div>
+                <div style={styles.headerColumn}>{email.result}</div>
+                <div style={styles.headerColumn}>{email.service}</div>
+                <div style={styles.headerColumn}>{email.template}</div>
+                <div style={styles.headerColumn}>{email.resends}</div>
+              </div>
+            ))
+          )}
         </div>
-    
-        <div style={styles.noDataContainer}>
-          <h4 style={styles.noDataTitle}>The email history is empty</h4>
-          <p style={styles.noDataText}>
-            In the email history, you will see the populated emails from requests.<br />
-            For more information, please check the Email Documentation.
-          </p>
-        </div>
-      </div>
     </div>
   );
 };
@@ -119,10 +231,28 @@ const styles: { [key: string]: React.CSSProperties } = {
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   icon: {
     width: '16px',
     height: '16px',
+  },
+  deleteButton: {
+    marginLeft: '5px',
+    padding: '5px',
+    borderRadius: '4px',
+    border: '1px solid #ccc',
+    backgroundColor: 'white',
+    color: '#999', // Disable'da gri
+  },
+  deleteIcon: {
+    width: '16px',
+    height: '16px',
+    content: '""',
+    display: 'block',
+    backgroundImage: 'url("/icons/trash.png")', // Silme simgesi
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
   },
   tableContainer: {
     marginTop: '20px',
