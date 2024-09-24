@@ -16,16 +16,6 @@ const Link1Page = () => {
             borderRadius: '6px', 
           }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            style={{ width: '20px', height: '14px', marginRight: '8px' }}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-          </svg>
           Invite Teammate
         </button>
         <p style={{ marginTop: '10px', fontSize: '14px', color: 'gray' }}>

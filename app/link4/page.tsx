@@ -1,11 +1,33 @@
 'use client'; 
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Link5Page: React.FC = () => {
+  const [templates, setTemplates] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [isButtonClickable, setIsButtonClickable] = useState<boolean>(false); 
+
   const handleRefresh = () => {
-    window.location.reload();
+    setLoading(true);
+    fetchTemplates();
   };
+
+  const fetchTemplates = async () => {
+    try {
+      const response = await fetch('/api/templates');
+      const data = await response.json();
+      setTemplates(data);
+      setIsButtonClickable(true); 
+    } catch (error) {
+      console.error('Error fetching templates:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTemplates();
+  }, []);
 
   return (
     <div style={styles.container}>
@@ -14,18 +36,26 @@ const Link5Page: React.FC = () => {
         <div style={styles.dropdownContainer}>
           <select style={styles.dropdown}>
             <option value="">All Templates</option>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+            {loading ? (
+              <option>Loading...</option>
+            ) : (
+              templates.map((template, index) => (
+                <option key={index} value={template}>{template}</option>
+              ))
+            )}
           </select>
-          <button style={styles.updateButton} onClick={handleRefresh}>
+          <button style={styles.updateButton} onClick={handleRefresh} disabled={!isButtonClickable}>
             <img
               src="reload.png" 
               alt="Reload"
               style={styles.icon}
             />
           </button>
-          
+        </div>
+        <div style={styles.exportToCVContainer}>
+          <button style={{ ...styles.exportButton, opacity: isButtonClickable ? 1 : 0.5 }} disabled={!isButtonClickable}>
+            Export to CV
+          </button>
         </div>
       </div>
       <div style={styles.headersContainer}>
@@ -74,14 +104,17 @@ const styles: { [key: string]: React.CSSProperties } = {
     minWidth: '200px',
   },
   updateButton: {
-    marginLeft: '5px',
+    marginLeft: '10px',
     padding: '5px',
-    borderRadius: '4px',
+    borderRadius: '50%',
     border: '1px solid #ccc',
-    color: 'white',
+    backgroundColor: '#fff',
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+    transition: 'background-color 0.3s ease',
   },
   icon: {
     width: '16px', 
@@ -98,6 +131,19 @@ const styles: { [key: string]: React.CSSProperties } = {
     textAlign: 'center',
     backgroundColor: '#f0f0f0',
   },
+  exportButton: {
+    padding: '2px 14px',
+    borderRadius: '5px',
+    border: '1px solid gray',
+    backgroundColor: 'gray',
+    color: 'white',
+    cursor: 'pointer',
+    display: 'flex',
+    marginLeft: 'auto', 
+    marginTop: '-35px', 
+    transition: 'background-color 0.3s ease',
+  },
+  
   noDataContainer: {
     marginTop: '20px',
     textAlign: 'center',

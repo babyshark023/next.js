@@ -8,11 +8,11 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const Link6Page: React.FC = () => {
   const [data, setData] = useState({
-    labels: [], // X ekseni etiketleri (zaman)
+    labels: [], 
     datasets: [
       {
-        label: 'Received Emails', // Gelen e-postalar için etiket
-        data: [], // E-posta sayıları
+        label: 'Received Emails', 
+        data: [], 
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
@@ -26,16 +26,16 @@ const Link6Page: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('/api/getStatistics'); // API'den veri al
+      const response = await fetch('/api/getStatistics'); 
       const result = await response.json();
 
-      // API'den dönen verilere göre grafik verilerini güncelle
+ 
       setData({
-        labels: result.dates, // API'den gelen zaman etiketleri
+        labels: result.dates, 
         datasets: [
           {
             ...data.datasets[0],
-            data: result.counts, // API'den gelen e-posta sayıları
+            data: result.counts,
           },
         ],
       });
@@ -46,9 +46,9 @@ const Link6Page: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, []); // Sayfa yüklendiğinde verileri çek
+  }, []); 
 
-  // Grafik seçenekleri
+ 
   const options = {
     responsive: true,
     plugins: {
@@ -62,15 +62,15 @@ const Link6Page: React.FC = () => {
     },
     scales: {
       y: {
-        type: 'linear' as const, // Y ekseni tipi
+        type: 'linear' as const, 
         title: {
           display: true,
           text: '# of Emails',
         },
         ticks: {
-          beginAtZero: false, // Y ekseni sıfırdan başlamaz
-          stepSize: 1, // Y eksenindeki her bir adımın boyutu 1
-          callback: (value: string | number) => value, // Herhangi bir dönüşüm olmadan döndür
+          beginAtZero: false, 
+          stepSize: 1, 
+          callback: (value: string | number) => value, 
         },
       },
       x: {
@@ -88,13 +88,12 @@ const Link6Page: React.FC = () => {
       <div style={styles.dropdownContainer}>
         <select style={styles.dropdown}>
           <option value="">Daily</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          <option value="option1">Weekly</option>
+          <option value="option2">Monthly</option>
         </select>
         <button style={styles.updateButton} onClick={handleRefresh}>
           <img
-            src="/reload.png" // Next.js ile statik dosyalar için kök dizin
+            src="/reload.png"
             alt="Reload"
             style={styles.icon}
           />
@@ -134,14 +133,17 @@ const styles: { [key: string]: React.CSSProperties } = {
     minWidth: '200px',
   },
   updateButton: {
-    marginLeft: '5px',
+    marginLeft: '10px',
     padding: '5px',
-    borderRadius: '4px',
+    borderRadius: '50%',
     border: '1px solid #ccc',
-    color: 'white',
+    backgroundColor: '#fff',
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+    transition: 'background-color 0.3s ease', 
   },
   icon: {
     width: '16px',
@@ -149,8 +151,8 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   chartContainer: {
     marginTop: '40px',
-    maxWidth: '800px', // Genişliği artırdık
-    height: '400px', // Yüksekliği artırdık
+    maxWidth: '800px', 
+    height: '400px', 
     margin: '0 auto',
   },
 };

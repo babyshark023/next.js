@@ -43,7 +43,7 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'general' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('general')}
-          style={{ backgroundColor: '#28a745', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px' }}
+          style={{ backgroundColor: '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px' }}
         >
           <span>General</span>
         </button>
@@ -52,7 +52,7 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'subscription' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('subscription')}
-          style={{ backgroundColor: '#28a745', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
+          style={{ backgroundColor: '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
         >
           <span>Subscription</span>
         </button>
@@ -61,7 +61,7 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'invoices' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('invoices')}
-          style={{ backgroundColor: '#28a745', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
+          style={{ backgroundColor: '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
         >
           <span>Invoices</span>
         </button>
@@ -70,78 +70,128 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'security' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('security')}
-          style={{ backgroundColor: '#28a745', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
+          style={{ backgroundColor: '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
         >
           <span>Security</span>
         </button>
       </section>
 
       <div style={{ marginTop: '20px' }}>
-        {activeTab === 'general' && (
-           <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px',marginRight:'50px' }}>
-           <h2 style={{ fontWeight: 'bold', fontSize:'20px' }}>API Keys</h2>
-            <div style={{ marginBottom: '10px' }}>
-              <span style={{marginRight: '10px' }}>Public Key:</span>
-              <input
-                type="text"
-                placeholder="Enter your public key..."
-                value={publicKey}
-                onChange={(e) => setPublicKey(e.target.value)}
-                style={{
-                  marginLeft: '10px',
-                  padding: '5px',
-                  width: '300px',
-                  border: '1px solid #ccc',
-                  borderRadius: '4px',
-                }}
-              />
-            </div>
-            <div style={{ marginBottom: '10px' }}>
-              <span style={{ marginRight: '10px' }}>Private Key:</span>
-              <input
-                type="text"
-                placeholder="Enter your private key..."
-                value={privateKey}
-                onChange={(e) => setPrivateKey(e.target.value)}
-                style={{
-                  marginLeft: '10px',
-                  padding: '5px',
-                  width: '300px',
-                  border: '1px solid #ccc',
-                  borderRadius: '4px',
-                }}
-              />
-            </div>
+      {activeTab === 'general' && (
+  <div>
+   
+    <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px', marginRight: '50px' }}>
+      <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>API Keys</h2>
+      <div style={{ marginBottom: '10px' }}>
+        <span style={{ marginRight: '10px' }}>Public Key:</span>
+        <input
+          type="text"
+          placeholder="Enter your public key..."
+          value={publicKey}
+          onChange={(e) => setPublicKey(e.target.value)}
+          style={{
+            marginLeft: '10px',
+            padding: '5px',
+            width: '300px',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+          }}
+        />
+      </div>
+      <div style={{ marginBottom: '10px' }}>
+        <span style={{ marginRight: '10px' }}>Private Key:</span>
+        <input
+          type="text"
+          placeholder="Enter your private key..."
+          value={privateKey}
+          onChange={(e) => setPrivateKey(e.target.value)}
+          style={{
+            marginLeft: '10px',
+            padding: '5px',
+            width: '300px',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+          }}
+        />
+      </div>
+      <button
+        style={{
+          marginTop: '20px',
+          padding: '5px 12px',
+          fontSize: '16px',
+          color: 'white',
+          backgroundColor: '#464c5c',
+          display: 'flex',
+          alignItems: 'center',
+          borderRadius: '6px',
+        }}
+        onClick={handleRefreshKeys}
+      >
+        Add New Service
+      </button>
+    </div>
 
-            <button
-              style={{
-                marginTop: '20px',
-                padding: '5px 12px',
-                fontSize: '16px',
-                color: 'white',
-                backgroundColor: '#464c5c',
-                display: 'flex',
-                alignItems: 'center',
-                borderRadius: '6px',
-              }}
-              onClick={handleRefreshKeys}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                style={{ width: '20px', height: '14px', marginRight: '8px' }}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-              </svg>
-              Add New Service
-            </button>
-            
-          </div>
-          
-        )}
+<div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '10px', marginRight: '50px' }}>
+  <h2 style={{ fontWeight: 'bold', fontSize: '20px', marginBottom: '10px' }}>Notifications</h2>
+  <p style={{ marginBottom: '15px' }}>All system notifications will be sent to the email address below:</p>
+  <label htmlFor="email" style={{ display: 'block', marginBottom: '5px', color: '#495057' }}>Email*</label>
+  <input 
+    id="email"
+    type="email" 
+    style={{ width: '100%', padding: '4px', marginBottom: '10px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#c7d1c9'}} 
+  />
+  <button
+    style={{
+      marginTop: '20px',
+      padding: '5px 12px',
+      fontSize: '16px',
+      color: 'white',
+      backgroundColor: '#464c5c',
+      display: 'flex',
+      alignItems: 'center',
+      borderRadius: '6px',
+    }}
+    onClick={handleRefreshKeys}
+  >
+    Change
+  </button>
+</div>
+    <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px', marginRight: '50px' }}>
+      <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>Delete Account</h2>
+      <p style={{ marginBottom: '15px' }}>Before you go...</p>
+      <ol>
+             <li>Please make sure you have canceled your paid subscription.</li>
+              <li>If you have problems with integration, please contact support; we will help you.</li>
+              <li>If you are interested in receiving newsletters from us, do not delete your account.</li>
+     </ol>
+      <button
+  style={{
+    marginTop: '20px',
+    padding: '5px 12px',
+    fontSize: '16px',
+    color: 'white',
+    backgroundColor: '#464c5c',
+    borderRadius: '6px',
+    display: 'flex',
+    alignItems: 'center', 
+  }}
+>
+  <img
+    src="/icons/trash.png" 
+    alt="Trash Icon"
+    style={{
+      width: '20px',
+      height: '20px',
+      marginRight: '8px', 
+      filter: 'invert(1)', 
+    }}
+  />
+  Delete My Account
+</button>
+
+    </div>
+  </div>
+)}
       {activeTab === 'subscription' && (
   <div style={{ border: '1px solid #ccc', padding: '15px', borderRadius: '5px' }}>
    <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>Subscription Details</h2>
@@ -155,8 +205,8 @@ const Link8Page: React.FC = () => {
     <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
       <button
         style={{
-          padding: '10px 15px',
-          backgroundColor: '#28a745',
+         padding:'2px 14px',
+          backgroundColor: '#579c5a',
           color: 'white',
           border: 'none',
           borderRadius: '5px',
@@ -168,7 +218,7 @@ const Link8Page: React.FC = () => {
       </button>
       <button
         style={{
-          padding: '10px 15px',
+          padding:'2px 14px',
           backgroundColor: '#dc3545',
           color: 'white',
           border: 'none',
@@ -228,7 +278,7 @@ const Link8Page: React.FC = () => {
                   padding: '5px 12px',
                   fontSize: '16px',
                   color: 'white',
-                  backgroundColor: '#28a745',
+                  backgroundColor: '#579c5a',
                   borderRadius: '6px',
                 }}
                 onClick={handleAddDomain}
@@ -248,16 +298,7 @@ const Link8Page: React.FC = () => {
                 }}
                 onClick={handleRefreshKeys}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  style={{ width: '20px', height: '14px', marginRight: '8px' }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
+              
                 Save Changes
               </button>
             </div>
@@ -266,19 +307,31 @@ const Link8Page: React.FC = () => {
             <div style={{ border: '2px solid #ccc', padding: '15px', borderRadius: '5px', marginTop: '20px',marginRight:'50px' }}>
             <h2 style={{ fontWeight: 'bold', fontSize: '20px' }}>API Settings</h2>
 
-              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                <input type="checkbox" id="option1" />
-                <label htmlFor="option1" style={{ marginLeft: '10px' }}>
-                  Allow EmailJS API for non-browser applications.
-                </label>
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+  <input type="checkbox" id="option1" />
+  <label htmlFor="option1" style={{ marginLeft: '10px', display: 'flex', alignItems: 'center' }}>
+    Allow EmailJS API for non-browser applications.
+    <img 
+      src="/icons/question.png" 
+      alt="Help" 
+      title="This option allows the EmailJS API to be used in non-browser applications." 
+      style={{ marginLeft: '5px', width: '20px', height: '20px' }} 
+    />
+  </label>
+</div>
 
-              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                <input type="checkbox" id="option2" />
-                <label htmlFor="option2" style={{ marginLeft: '10px' }}>
-                  Use Private Key (recommended)
-                </label>
-              </div>
+<div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+  <input type="checkbox" id="option2" />
+  <label htmlFor="option2" style={{ marginLeft: '10px', display: 'flex', alignItems: 'center' }}>
+    Use Private Key (recommended)
+    <img 
+      src="/icons/question.png" 
+      alt="Help" 
+      title="Using a private key is recommended for security purposes." 
+      style={{ marginLeft: '5px', width: '20px', height: '20px' }} 
+    />
+  </label>
+</div>
 
               <button
                 style={{
@@ -293,16 +346,7 @@ const Link8Page: React.FC = () => {
                 }}
                 onClick={handleRefreshKeys}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  style={{ width: '20px', height: '14px', marginRight: '8px' }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
+               
                 Save Changes
               </button>
             </div>
