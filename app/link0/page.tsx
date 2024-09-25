@@ -12,7 +12,10 @@ const Link1Page = () => {
   const [userEmail, setUserEmail] = useState<string>(''); 
   const [appPassword, setAppPassword] = useState<string>(''); 
   const [isTestEmail, setIsTestEmail] = useState(false); 
-  const [selectedRegion, setSelectedRegion] = useState<string>(''); 
+  const [selectedRegion, setSelectedRegion] = useState<string>('');
+  const [serviceList, setServiceList] = useState<any[]>([]);  
+  
+  
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -39,18 +42,62 @@ const Link1Page = () => {
     setIsTestEmail(false); 
     setSelectedRegion(''); 
   };
-
   const handleSubmit = () => {
-    console.log('Name:', name);
-    console.log('Service ID:', serviceId);
-    console.log('User Email:', userEmail);
-    console.log('App Password:', appPassword);
-    console.log('Send test email:', isTestEmail);
-    console.log('Selected Region:', selectedRegion); 
-    closeConfigPopup();
-  };
+    const newService = {
+      name,
+      serviceId,
+      userEmail,
+      appPassword,
+      selectedRegion,
+      isTestEmail,
+      icon: selectedIcon,
+    };
+    
+    const openConfigPopup = (service: string) => {
+  setSelectedService(service);
+  setSelectedIcon(`/icons/${service.toLowerCase()}.png`);
+  setName(service);
+  setServiceId('');
+  setUserEmail(''); 
+  setAppPassword(''); 
+  setSelectedRegion(''); 
+  setShowPopup(false);
+  setShowConfigPopup(true);
+};
+
+
+    //const handleSubmit = () => {
+    const newServiceData = {
+      name,
+      serviceId,
+      userEmail,
+      appPassword,
+      selectedRegion,
+      isTestEmail,
+      icon: selectedIcon,
+    };
+
+    // Add the new service to the list
+    setServiceList([...serviceList, newService]);
+
+    // Close the popup after service is created
+    closeConfigPopup(); 
+};
+const cardContentStyles: React.CSSProperties = {
+  textAlign: 'center', 
+  
+};
+
+
+const iconStyles: React.CSSProperties = {
+  width: '40px',
+  height: '40px',
+};
+
 
   const isEmailService = selectedService === 'Gmail' || selectedService === 'Outlook';
+  
+
 
   return (
     <div style={{ marginLeft: '300px', marginTop: '50px' }}>
@@ -72,6 +119,39 @@ const Link1Page = () => {
       >
         <span style={{ marginRight: '8px' }}>Add New Service</span>
       </button>
+
+      {serviceList.length > 0 && (
+    <div style={{ marginTop: '20px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        {serviceList.map((service, index) => (
+          <div key={index} style={{ display: 'flex', alignItems: 'center', padding: '10px', border: '1px solid #ddd', borderRadius: '5px', width: '100%', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', justifyContent: 'space-between' }}>
+            <img src={service.icon} alt={service.name} style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+            <div style={{ flexGrow: 1, textAlign: 'left', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ flexGrow: 1 }}>
+                <h3 style={{ margin: 0 }}>{service.name}</h3>
+                <p style={{ margin: 0 }}>Service ID: {service.serviceId}</p>
+              </div>
+              <button style={{ ...defaultButtonStyles, marginRight: '500px' }}>Default</button> 
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <button style={editButtonStyles}>
+                <img src="/icons/edit.png" alt="More" style={{ width: '15px', height: '15px', marginRight: '5px' }} />
+              </button>
+              <button style={deleteButtonStyles}>
+                <img src="/icons/trash.png" alt="Delete" style={{ width: '15px', height: '15px', marginRight: '5px' }} />
+              </button>
+              <button style={moreButtonStyles}>
+                <img src="/icons/more.png" alt="More" style={{ width: '15px', height: '15px', marginRight: '5px' }} />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+)}
+
+
+
 
       {showPopup && (
         <div style={popupStyles}>
@@ -314,11 +394,7 @@ const closeButtonStyles: React.CSSProperties = {
   cursor: 'pointer',
 };
 
-const iconStyles: React.CSSProperties = {
-  width: '20px',
-  height: '20px',
-  marginRight: '8px',
-};
+
 
 const serviceBoxStyles: React.CSSProperties = {
   width: '160px',
@@ -344,6 +420,94 @@ const inputStyles: React.CSSProperties = {
   border: '1px solid #ccc',
   marginBottom: '8px',
   fontSize: '14px',
+};
+// Card view styles
+const cardContainerStyles = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+  gap: '20px',
+  marginTop: '20px',
+};
+
+const cardStyles: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column', // FlexDirection türü olmalı (örneğin 'column' veya 'row')
+  padding: '16px',
+  borderRadius: '8px',
+  boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
+  backgroundColor: '#ffffff',
+  justifyContent: 'space-between', // bu da belirli sabit bir değer olmalı
+};
+
+const iconStyles = {
+  width: '40px',
+  height: '40px',
+  marginBottom: '10px',
+};
+
+const cardContentStyles = {
+  textAlign: 'center',
+};
+
+const cardTitleStyles = {
+  fontSize: '18px',
+  fontWeight: 'bold',
+  marginBottom: '5px',
+};
+
+const cardSubtitleStyles = {
+  fontSize: '14px',
+  color: '#555',
+  marginBottom: '10px',
+};
+
+const defaultButtonStyles = {
+  padding: '5px 10px',
+  fontSize: '14px',
+  backgroundColor: '#c7d1c9',
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  
+};
+
+const cardActionsStyles = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginTop: '10px',
+};
+
+const editButtonStyles = {
+  padding: '5px 10px',
+  fontSize: '14px',
+  backgroundColor: '#c7d1c9',
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+};
+
+const deleteButtonStyles = {
+  padding: '5px 10px',
+  fontSize: '14px',
+  backgroundColor: '#c7d1c9',
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+};
+
+const moreButtonStyles = {
+  padding: '5px 10px',
+  fontSize: '14px',
+  backgroundColor: '#c7d1c9',
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
 };
 
 export default Link1Page;

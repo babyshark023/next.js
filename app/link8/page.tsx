@@ -43,7 +43,7 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'general' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('general')}
-          style={{ backgroundColor: '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px' }}
+          style={{ backgroundColor: activeTab === 'general' ? '#464c5c' : '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px' }}
         >
           <span>General</span>
         </button>
@@ -52,7 +52,7 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'subscription' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('subscription')}
-          style={{ backgroundColor: '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
+          style={{ backgroundColor: activeTab === 'subscription' ? '#464c5c' : '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
         >
           <span>Subscription</span>
         </button>
@@ -61,7 +61,7 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'invoices' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('invoices')}
-          style={{ backgroundColor: '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
+          style={{ backgroundColor: activeTab === 'invoices' ? '#464c5c' : '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
         >
           <span>Invoices</span>
         </button>
@@ -70,7 +70,7 @@ const Link8Page: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'security' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('security')}
-          style={{ backgroundColor: '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
+          style={{ backgroundColor: activeTab === 'security' ? '#464c5c' : '#579c5a', color: 'white',    border: '1px solid #ccc', padding:'2px 14px',marginTop:'10px',borderRadius:'7px'  }}
         >
           <span>Security</span>
         </button>

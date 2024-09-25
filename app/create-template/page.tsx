@@ -10,10 +10,11 @@ const CreateTemplatePage: React.FC = () => {
   const [phone, setPhone] = useState('{{phone}}');
   const [message, setMessage] = useState('{{message}}');
   const [replyMessage, setReplyMessage] = useState('Thank you for reaching out! We will get back to you shortly.');
-  const [selectedTemplate, setSelectedTemplate] = useState('default');
   const [showEditorOptions, setShowEditorOptions] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupContent, setPopupContent] = useState('');
+  const [isOpen, setIsOpen] = useState(false); // State to manage dropdown open status
+  const [selectedTemplate, setSelectedTemplate] = useState('');
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -50,6 +51,10 @@ const CreateTemplatePage: React.FC = () => {
     marginTop: '10px',
     borderRadius: '7px',
   };
+  const activeButtonStyle: CSSProperties = {
+    ...buttonStyle,
+    backgroundColor: '#464c5c', 
+  };
 
   const cardStyle: CSSProperties = {
     display: 'flex',
@@ -65,6 +70,7 @@ const CreateTemplatePage: React.FC = () => {
     width: '300px',
     height: '80px',
   };
+  
 
   return (
     <div style={{ marginLeft: '300px', marginTop: '50px' }}>
@@ -77,7 +83,7 @@ const CreateTemplatePage: React.FC = () => {
             key={tab}
             type="button"
             onClick={() => handleTabClick(tab)}
-            style={buttonStyle}
+            style={activeTab === tab ? activeButtonStyle : buttonStyle}
           >
             {tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
@@ -160,6 +166,8 @@ const CreateTemplatePage: React.FC = () => {
         </div>
       </div>
 
+
+      <div style={{ border: '2px solid #ccc', padding: '20px', borderRadius: '8px' }}>
       <div style={{ marginTop: '20px' }}>
         <div style={{ marginBottom: '20px' }}>
           <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
@@ -218,7 +226,7 @@ const CreateTemplatePage: React.FC = () => {
                 borderRadius: '4px',
                 position: 'relative',
                 overflow: 'hidden',
-                width: '800px',
+                width: '700px',
                 height: '300px',
               }}
             >
@@ -261,8 +269,8 @@ const CreateTemplatePage: React.FC = () => {
           {activeContentTab === 'mobile' && (
             <div
               style={{
-                width: '320px',
-                height: '500px',
+                width: '700px',
+                height: '300px',
                 border: '10px solid #ccc',
                 borderRadius: '30px',
                 overflow: 'hidden',
@@ -315,6 +323,9 @@ const CreateTemplatePage: React.FC = () => {
         </div>
       </div>
     </div>
+</div>
+
+
 
     <div style={{ marginLeft: '20px', marginBottom: '30px', border: '1px solid #ccc', borderRadius: '8px', padding: '20px' }}>
       <form style={{ width: '300px' }}>
@@ -390,7 +401,6 @@ const CreateTemplatePage: React.FC = () => {
         <img src="/icons/unlink.png" alt="Unlink" style={{ width: '16px', height: '16px' }} />
       </button>
     </label>
-   
 
     <select 
       id="reply_template" 
@@ -398,24 +408,23 @@ const CreateTemplatePage: React.FC = () => {
       onChange={(e) => setSelectedTemplate(e.target.value)} 
       style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ccc', width: '50%' }}
     >
-      <option value="default">Default Reply</option>
-      <option value="custom">Custom Reply</option>
+      <option value="" disabled>Select the template</option> {/* Placeholder option */}
+      {/* Other options removed */}
     </select>
-     
-    <div style={{ border: '1px solid #ccc', padding: '8px', borderRadius: '4px', marginBottom: '10px', height:'70px' ,marginTop:'10px',width:'620px', backgroundColor:'#c7d1c9'}}>
-  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
-    <img src="/icons/warning.png" alt="Warning" style={{ width: '16px', height: '16px', marginRight: '5px' }} />
-    <p style={{ margin: '5px 10px 10px 0', color: '#3e5252', fontSize: '14px' }}>
-      Link the template to send it as a reply automatically.<br />
-      NOTE: this will consume additional requests quota.
-    </p>
-  </div>
-</div>
 
+    <div style={{ border: '1px solid #ccc', padding: '8px', borderRadius: '4px', marginBottom: '10px', height: '70px', marginTop: '10px', width: '620px', backgroundColor: '#c7d1c9' }}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+        <img src="/icons/warning.png" alt="Warning" style={{ width: '16px', height: '16px', marginRight: '5px' }} />
+        <p style={{ margin: '5px 10px 10px 0', color: '#3e5252', fontSize: '14px' }}>
+          Link the template to send it as a reply automatically.<br />
+          NOTE: this will consume additional requests quota.
+        </p>
+      </div>
+    </div>
   </div>
-  
-  
 )}
+
+
 {activeTab === 'Attachments' && (
   <div>
     <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '4px', marginBottom: '10px', height: '100px', backgroundColor: '#e9ecef', position: 'relative' }}>

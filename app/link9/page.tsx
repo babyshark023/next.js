@@ -40,7 +40,8 @@ const TeamMembersPage: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'profile' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('profile')}
-          style={{ backgroundColor: '#28a745', color: 'white', border: '1px solid #ccc', padding: '2px 14px', marginTop: '10px', borderRadius: '7px' }}
+          style={{ backgroundColor: activeTab === 'profile' ? '#464c5c' : '#579c5a'
+            , color: 'white', border: '1px solid #ccc', padding: '2px 14px', marginTop: '10px', borderRadius: '7px' }}
         >
           <span>Profile</span>
         </button>
@@ -48,7 +49,7 @@ const TeamMembersPage: React.FC = () => {
           type="button"
           className={`ejs-button ejs-button-default _tab_1dele_1 ${activeTab === 'security' ? '_active_1dele_11' : ''}`}
           onClick={() => handleTabClick('security')}
-          style={{ backgroundColor: '#28a745', color: 'white', border: '1px solid #ccc', padding: '2px 14px', marginTop: '10px', borderRadius: '7px' }}
+          style={{ backgroundColor: activeTab === 'security' ? '#464c5c' : '#579c5a', color: 'white', border: '1px solid #ccc', padding: '2px 14px', marginTop: '10px', borderRadius: '7px' }}
         >
           <span>Security</span>
         </button>
@@ -77,7 +78,7 @@ const TeamMembersPage: React.FC = () => {
                 padding: '5px 12px',
                 fontSize: '16px',
                 color: 'white',
-                backgroundColor: '#28a745',
+                backgroundColor: '#579c5a',
                 borderRadius: '6px',
               }}
               onClick={handleSaveUserName}
