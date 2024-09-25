@@ -10,11 +10,10 @@ const CreateTemplatePage: React.FC = () => {
   const [phone, setPhone] = useState('{{phone}}');
   const [message, setMessage] = useState('{{message}}');
   const [replyMessage, setReplyMessage] = useState('Thank you for reaching out! We will get back to you shortly.');
+  const [selectedTemplate, setSelectedTemplate] = useState('default');
   const [showEditorOptions, setShowEditorOptions] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupContent, setPopupContent] = useState('');
-  const [isOpen, setIsOpen] = useState(false); // State to manage dropdown open status
-  const [selectedTemplate, setSelectedTemplate] = useState('');
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -70,6 +69,7 @@ const CreateTemplatePage: React.FC = () => {
     width: '300px',
     height: '80px',
   };
+  
   
 
   return (
@@ -190,28 +190,31 @@ const CreateTemplatePage: React.FC = () => {
               Mobile
             </button>
             <div style={{ position: 'relative' }}>
-              <button
-                type="button"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                style={{ ...buttonStyle, backgroundColor: '#5a709e', color: 'white', border: 'none', borderRadius: '7px' }}
-              >
-                Edit Content
-              </button>
-              {showEditorOptions && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '100%',
-                    left: '0',
-                    backgroundColor: 'white',
-                    border: '1px solid #ccc',
-                    borderRadius: '4px',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-                  }}
-                >
-                  {/* Editor options */}
-                </div>
+    <button
+      type="button"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={() => handleCardClick('design')} // Kart tıklama olayını burada bağlayalım
+      style={{ ...buttonStyle, backgroundColor: '#5a709e', color: 'white', border: 'none', borderRadius: '7px' }}
+    >
+      Edit Content
+    </button>
+    {showEditorOptions && (
+      <div
+        style={{
+          position: 'absolute',
+          top: '100%',
+          left: '0',
+          backgroundColor: 'white',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+        }}
+      >
+        {/* Kullanıcı buradan 'design' veya 'code' seçeneklerini seçebilir */}
+        <button onClick={() => handleCardClick('design')}>Design Editor</button>
+        <button onClick={() => handleCardClick('code')}>Code Editor</button>
+      </div>
               )}
             </div>
           </div>
@@ -408,10 +411,10 @@ const CreateTemplatePage: React.FC = () => {
       onChange={(e) => setSelectedTemplate(e.target.value)} 
       style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ccc', width: '50%' }}
     >
-      <option value="" disabled>Select the template</option> {/* Placeholder option */}
-      {/* Other options removed */}
+      <option value="" disabled>Select the templates</option> {/* Visible prompt for users */}
+      {/* Add your options here when available */}
     </select>
-
+     
     <div style={{ border: '1px solid #ccc', padding: '8px', borderRadius: '4px', marginBottom: '10px', height: '70px', marginTop: '10px', width: '620px', backgroundColor: '#c7d1c9' }}>
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
         <img src="/icons/warning.png" alt="Warning" style={{ width: '16px', height: '16px', marginRight: '5px' }} />

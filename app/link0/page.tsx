@@ -14,6 +14,7 @@ const Link1Page = () => {
   const [isTestEmail, setIsTestEmail] = useState(false); 
   const [selectedRegion, setSelectedRegion] = useState<string>('');
   const [serviceList, setServiceList] = useState<any[]>([]);  
+  const [errorMessage, setErrorMessage] = useState<string>('');
   
   
 
@@ -40,7 +41,9 @@ const Link1Page = () => {
     setUserEmail(''); 
     setAppPassword(''); 
     setIsTestEmail(false); 
-    setSelectedRegion(''); 
+    setSelectedRegion('');
+    setErrorMessage(''); // Reset the error message
+ 
   };
   const handleSubmit = () => {
     const newService = {
@@ -93,7 +96,7 @@ const iconStyles: React.CSSProperties = {
   width: '40px',
   height: '40px',
 };
-
+  
 
   const isEmailService = selectedService === 'Gmail' || selectedService === 'Outlook';
   
