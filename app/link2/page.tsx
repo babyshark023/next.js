@@ -257,7 +257,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     height: '16px',
     content: '""',
     display: 'block',
-    backgroundImage: 'url("/icons/trash.png")', // Silme simgesi
+    backgroundImage: 'url("/icons/trash.png")', 
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
   },

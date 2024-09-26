@@ -4,28 +4,28 @@ import React, { useState, useEffect } from 'react';
 
 const Link3Page: React.FC = () => {
   const [isDeleteDisabled, setIsDeleteDisabled] = useState(true);
-  const [templates, setTemplates] = useState<string[]>([]); // Şablonlar için state
-  const [selectedTemplate, setSelectedTemplate] = useState<string>(''); // Seçilen şablon için state
-  const [suppressions, setSuppressions] = useState<{ email: string; template: string }[]>([]); // Suppressions için state
+  const [templates, setTemplates] = useState<string[]>([]); 
+  const [selectedTemplate, setSelectedTemplate] = useState<string>(''); 
+  const [suppressions, setSuppressions] = useState<{ email: string; template: string }[]>([]); 
   const [loading, setLoading] = useState(true);
 
-  // API'den veri çekme fonksiyonu
+  
   const fetchTemplates = async () => {
     try {
-      const response = await fetch('/api/templates'); // API endpoint'ini güncelleyin
+      const response = await fetch('/api/templates'); 
       const data = await response.json();
-      setTemplates(data.templates); // API'den gelen şablonları state'e kaydediyoruz
+      setTemplates(data.templates); 
     } catch (error) {
       console.error('API verisi alınamadı:', error);
     }
   };
 
-  // Suppressions için veri çekme fonksiyonu
+ 
   const fetchSuppressions = async () => {
     try {
-      const response = await fetch('/api/suppressions'); // Suppressions API endpoint'i
+      const response = await fetch('/api/suppressions'); 
       const data = await response.json();
-      setSuppressions(data.suppressions); // API'den gelen suppressions'ı state'e kaydediyoruz
+      setSuppressions(data.suppressions); 
     } catch (error) {
       console.error('Suppressions verisi alınamadı:', error);
     } finally {
@@ -34,8 +34,8 @@ const Link3Page: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchTemplates(); // Bileşen yüklendiğinde API'den veriyi çeker
-    fetchSuppressions(); // Suppressions verisini çeker
+    fetchTemplates(); 
+    fetchSuppressions(); 
   }, []);
 
   const handleRefresh = () => {
@@ -53,7 +53,7 @@ const Link3Page: React.FC = () => {
         <select 
           style={styles.dropdown} 
           value={selectedTemplate} 
-          onChange={(e) => setSelectedTemplate(e.target.value)} // Seçim değiştiğinde state'i güncelle
+          onChange={(e) => setSelectedTemplate(e.target.value)} 
         >
           <option value="">All Templates</option>
           {templates.map((template, index) => (

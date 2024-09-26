@@ -42,7 +42,7 @@ const Link1Page = () => {
     setAppPassword(''); 
     setIsTestEmail(false); 
     setSelectedRegion('');
-    setErrorMessage(''); // Reset the error message
+    setErrorMessage(''); 
  
   };
   const handleSubmit = () => {
@@ -68,8 +68,6 @@ const Link1Page = () => {
   setShowConfigPopup(true);
 };
 
-
-    //const handleSubmit = () => {
     const newServiceData = {
       name,
       serviceId,
@@ -80,10 +78,8 @@ const Link1Page = () => {
       icon: selectedIcon,
     };
 
-    // Add the new service to the list
+  
     setServiceList([...serviceList, newService]);
-
-    // Close the popup after service is created
     closeConfigPopup(); 
 };
 const cardContentStyles: React.CSSProperties = {
@@ -424,7 +420,7 @@ const inputStyles: React.CSSProperties = {
   marginBottom: '8px',
   fontSize: '14px',
 };
-// Card view styles
+
 const cardContainerStyles = {
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
@@ -434,12 +430,12 @@ const cardContainerStyles = {
 
 const cardStyles: React.CSSProperties = {
   display: 'flex',
-  flexDirection: 'column', // FlexDirection türü olmalı (örneğin 'column' veya 'row')
+  flexDirection: 'column', 
   padding: '16px',
   borderRadius: '8px',
   boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
   backgroundColor: '#ffffff',
-  justifyContent: 'space-between', // bu da belirli sabit bir değer olmalı
+  justifyContent: 'space-between', 
 };
 
 const iconStyles = {

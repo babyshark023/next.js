@@ -14,6 +14,7 @@ const CreateTemplatePage: React.FC = () => {
   const [showEditorOptions, setShowEditorOptions] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupContent, setPopupContent] = useState('');
+  const [content, setContent] = useState('');
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -50,9 +51,10 @@ const CreateTemplatePage: React.FC = () => {
     marginTop: '10px',
     borderRadius: '7px',
   };
+
   const activeButtonStyle: CSSProperties = {
     ...buttonStyle,
-    backgroundColor: '#464c5c', 
+    backgroundColor: '#464c5c',
   };
 
   const cardStyle: CSSProperties = {
@@ -69,8 +71,6 @@ const CreateTemplatePage: React.FC = () => {
     width: '300px',
     height: '80px',
   };
-  
-  
 
   return (
     <div style={{ marginLeft: '300px', marginTop: '50px' }}>
@@ -90,244 +90,193 @@ const CreateTemplatePage: React.FC = () => {
         ))}
       </section>
       <div style={{ display: 'flex', marginTop: '20px' }}>
-  {/* Existing Content Section */}
-  {activeTab === 'Content' && (
-  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '20px' }}>
-    <div style={{ flex: 1 }}>
-      <div
-        style={{
-          marginBottom: '20px',
-          padding: '10px',
-          border: '2px solid #ccc',
-          borderRadius: '8px',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-         <div
-  style={{
-    display: 'flex',
-    justifyContent: 'flex-end',
-    gap: '10px',
-    position: 'fixed', 
-    top: '80px', 
-    right: '10px', 
-    zIndex: 1000, 
-  }}
->
-  <button style={{ ...buttonStyle, display: 'flex', alignItems: 'center' }}>
-    <img
-      src="/icons/playground.png"
-      alt="Icon 1"
-      style={{ width: '20px', height: '20px', marginRight: '5px' }}
-    />
-    Playground
-  </button>
-  <button style={{ ...buttonStyle, display: 'flex', alignItems: 'center' }}>
-    <img
-      src="/icons/test.png"
-      alt="Icon 2"
-      style={{ width: '20px', height: '20px', marginRight: '5px' }}
-    />
-    Test It
-  </button>
-  <button
-    style={{
-      ...buttonStyle,
-      display: 'flex',
-      alignItems: 'center',
-      backgroundColor: 'gray', 
-    }}
-  >
-    <img
-      src="/icons/save.png"
-      alt="Icon 3"
-      style={{ width: '20px', height: '20px', marginRight: '5px' }}
-    />
-    Save
-  </button>
-</div>
-        <div style={{ marginBottom: '10px' }}>
-          <label htmlFor="template_subject" style={{ display: 'block', marginBottom: '5px' }}>
-            Subject*
-          </label>
-          <input
-            type="text"
-            maxLength={70}
-            id="template_subject"
-            style={{
-              width: '64.7%',
-              padding: '8px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-            }}
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-          />
-        </div>
-      </div>
-
-
-      <div style={{ border: '2px solid #ccc', padding: '20px', borderRadius: '8px' }}>
-      <div style={{ marginTop: '20px' }}>
-        <div style={{ marginBottom: '20px' }}>
-          <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
-            <label htmlFor="template_content" style={{ display: 'block', marginBottom: '5px' }}>
-              Content*
-            </label>
-          </div>
-
-          <div style={{ display: 'flex', gap: '15px' }}>
-            <button
-              onClick={() => handleContentTabClick('desktop')}
-              style={{ ...buttonStyle, backgroundColor: activeContentTab === 'desktop' ? '#579c5a' : '#ccc' }}
-            >
-              Desktop
-            </button>
-            <button
-              onClick={() => handleContentTabClick('mobile')}
-              style={{ ...buttonStyle, backgroundColor: activeContentTab === 'mobile' ? '#579c5a' : '#ccc' }}
-            >
-              Mobile
-            </button>
-            <div style={{ position: 'relative' }}>
-    <button
-      type="button"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={() => handleCardClick('design')} // Kart tıklama olayını burada bağlayalım
-      style={{ ...buttonStyle, backgroundColor: '#5a709e', color: 'white', border: 'none', borderRadius: '7px' }}
-    >
-      Edit Content
-    </button>
-    {showEditorOptions && (
-      <div
-        style={{
-          position: 'absolute',
-          top: '100%',
-          left: '0',
-          backgroundColor: 'white',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-        }}
-      >
-        {/* Kullanıcı buradan 'design' veya 'code' seçeneklerini seçebilir */}
-        <button onClick={() => handleCardClick('design')}>Design Editor</button>
-        <button onClick={() => handleCardClick('code')}>Code Editor</button>
-      </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: '20px' }}>
-          {activeContentTab === 'desktop' && (
-            <div
-              style={{
-                border: '1px solid #ccc',
-                padding: '20px',
-                borderRadius: '4px',
-                position: 'relative',
-                overflow: 'hidden',
-                width: '700px',
-                height: '300px',
-              }}
-            >
-              <div
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  border: '1px solid #000',
-                  borderRadius: '10px',
-                  overflowY: 'scroll',
-                  backgroundColor: '#f9f9f9',
-                  padding: '20px',
-                }}
-              >
-                <div style={{ paddingLeft: '40px', fontSize: '18pt', fontFamily: 'Arial Black, sans-serif', textDecoration: 'underline' }}>
-                  Hello,
+        {activeTab === 'Content' && (
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '20px' }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ marginBottom: '20px', padding: '10px', border: '2px solid #ccc', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', position: 'fixed', top: '80px', right: '10px', zIndex: 1000 }}>
+                  <button style={{ ...buttonStyle, display: 'flex', alignItems: 'center' }}>
+                    <img src="/icons/playground.png" alt="Playground" style={{ width: '20px', height: '20px', marginRight: '5px' }} />
+                    Playground
+                  </button>
+                  <button style={{ ...buttonStyle, display: 'flex', alignItems: 'center' }}>
+                    <img src="/icons/test.png" alt="Test It" style={{ width: '20px', height: '20px', marginRight: '5px' }} />
+                    Test It
+                  </button>
+                  <button style={{ ...buttonStyle, display: 'flex', alignItems: 'center', backgroundColor: 'gray' }}>
+                    <img src="/icons/save.png" alt="Save" style={{ width: '20px', height: '20px', marginRight: '5px' }} />
+                    Save
+                  </button>
                 </div>
-                <div style={{ paddingLeft: '40px', fontSize: '18pt', fontFamily: 'Arial Black, sans-serif' }}>
-                  You have received a new message from <strong>{name || '{{name}}'}</strong>.
-                </div>
-                <div style={{ paddingLeft: '40px', fontSize: '18pt', fontFamily: 'Arial Black, sans-serif', textDecoration: 'underline' }}>
-                  Details:
-                </div>
-                <div style={{ paddingLeft: '40px', fontSize: '14pt', fontFamily: 'Arial Black, sans-serif' }}>
-                  <span style={{ color: '#ba372a' }}>Name:</span> {name || '{{name}}'}
-                </div>
-                <div style={{ paddingLeft: '40px', fontSize: '14pt', fontFamily: 'Arial Black, sans-serif' }}>
-                  <span style={{ color: '#ba372a' }}>Email:</span> {email || '{{email}}'}
-                </div>
-                <div style={{ paddingLeft: '40px', fontSize: '14pt', fontFamily: 'Arial Black, sans-serif' }}>
-                  <span style={{ color: '#ba372a' }}>Phone:</span> {phone || '{{phone}}'}
-                </div>
-                <div style={{ paddingLeft: '40px', fontSize: '14pt', fontFamily: 'Arial Black, sans-serif' }}>
-                  <span style={{ color: '#ba372a' }}>Message:</span> {message || '{{message}}'}
+                <div style={{ marginBottom: '10px' }}>
+                  <label htmlFor="template_subject" style={{ display: 'block', marginBottom: '5px' }}>
+                    Subject*
+                  </label>
+                  <input
+                    type="text"
+                    maxLength={70}
+                    id="template_subject"
+                    style={{ width: '64.7%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                  />
                 </div>
               </div>
-            </div>
-          )}
 
-          {activeContentTab === 'mobile' && (
-            <div
-              style={{
-                width: '700px',
-                height: '300px',
-                border: '10px solid #ccc',
-                borderRadius: '30px',
-                overflow: 'hidden',
-                position: 'relative',
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
-              }}
-            >
-              <div
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  border: '1px solid #000',
-                  borderRadius: '10px',
-                  backgroundColor: '#f9f9f9',
-                  padding: '10px',
-                  overflow: 'hidden',
-                }}
-              >
-                <div style={{
-                  height: '100%',
-                  overflowY: 'auto',
-                  paddingRight: '10px',
-                  boxSizing: 'content-box',
-                }}>
-                  <div style={{ fontSize: '16pt', fontFamily: 'Arial Black, sans-serif' }}>
-                    <strong>Hello!</strong>
+              <div style={{ border: '2px solid #ccc', padding: '20px', borderRadius: '8px' }}>
+                <div style={{ marginTop: '20px' }}>
+                  <div style={{ marginBottom: '20px' }}>
+                    <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+                      <label htmlFor="template_content" style={{ display: 'block', marginBottom: '5px' }}>
+                        Content*
+                      </label>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '15px' }}>
+                      <button
+                        onClick={() => handleContentTabClick('desktop')}
+                        style={{ ...buttonStyle, backgroundColor: activeContentTab === 'desktop' ? '#579c5a' : '#ccc' }}
+                      >
+                        Desktop
+                      </button>
+                      <button
+                        onClick={() => handleContentTabClick('mobile')}
+                        style={{ ...buttonStyle, backgroundColor: activeContentTab === 'mobile' ? '#579c5a' : '#ccc' }}
+                      >
+                        Mobile
+                      </button>
+                      <div style={{ position: 'relative' }}>
+                        <button
+                          type="button"
+                          onMouseEnter={handleMouseEnter}
+                          onMouseLeave={handleMouseLeave}
+                          onClick={() => handleCardClick('design')}
+                          style={{ ...buttonStyle, backgroundColor: '#5a709e', color: 'white', border: 'none', borderRadius: '7px' }}
+                        >
+                          Edit Content
+                        </button>
+                        {showEditorOptions && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '100%',
+                              left: '0',
+                              backgroundColor: 'white',
+                              border: '1px solid #ccc',
+                              borderRadius: '4px',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                            }}
+                          >
+                            <button onClick={() => handleCardClick('design')}>Design Editor</button>
+                            <button onClick={() => handleCardClick('code')}>Code Editor</button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  <div style={{ fontSize: '14pt', fontFamily: 'Arial Black, sans-serif', marginTop: '10px' }}>
-                    Thank you for your message! You will receive a response shortly.
-                  </div>
-                  <div style={{ fontSize: '14pt', fontFamily: 'Arial Black, sans-serif', marginTop: '10px' }}>
-                    <strong>Details:</strong>
-                  </div>
-                  <div style={{ paddingTop: '5px', fontSize: '12pt', fontFamily: 'Arial Black, sans-serif' }}>
-                    <span style={{ color: '#ba372a' }}>Name:</span> {name || '{{name}}'}
-                  </div>
-                  <div style={{ paddingTop: '5px', fontSize: '12pt', fontFamily: 'Arial Black, sans-serif' }}>
-                    <span style={{ color: '#ba372a' }}>Email:</span> {email || '{{email}}'}
-                  </div>
-                  <div style={{ paddingTop: '5px', fontSize: '12pt', fontFamily: 'Arial Black, sans-serif' }}>
-                    <span style={{ color: '#ba372a' }}>Phone:</span> {phone || '{{phone}}'}
-                  </div>
-                  <div style={{ paddingTop: '5px', fontSize: '12pt', fontFamily: 'Arial Black, sans-serif' }}>
-                    <span style={{ color: '#ba372a' }}>Message:</span> {message || '{{message}}'}
+
+                  <div style={{ display: 'flex', gap: '20px' }}>
+                    {activeContentTab === 'desktop' && (
+                      <div
+                        style={{
+                          border: '1px solid #ccc',
+                          padding: '20px',
+                          borderRadius: '4px',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          width: '700px',
+                          height: '300px',
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            border: '1px solid #000',
+                            borderRadius: '10px',
+                            overflowY: 'scroll',
+                            backgroundColor: '#f9f9f9',
+                            padding: '20px',
+                          }}
+                        >
+                          <div style={{ paddingLeft: '40px', fontSize: '18pt', fontFamily: 'Arial Black, sans-serif', textDecoration: 'underline' }}>
+                            Hello,
+                          </div>
+                          <div style={{ paddingLeft: '40px', fontSize: '18pt', fontFamily: 'Arial Black, sans-serif' }}>
+                            You have received a new message from <strong>{name || '{{name}}'}</strong>.
+                          </div>
+                          <div style={{ paddingLeft: '40px', fontSize: '18pt', fontFamily: 'Arial Black, sans-serif', textDecoration: 'underline' }}>
+                            Details:
+                          </div>
+                          <div style={{ paddingLeft: '40px', fontSize: '14pt', fontFamily: 'Arial Black, sans-serif' }}>
+                            <span style={{ color: '#ba372a' }}>Name:</span> {name || '{{name}}'}
+                          </div>
+                          <div style={{ paddingLeft: '40px', fontSize: '14pt', fontFamily: 'Arial Black, sans-serif' }}>
+                            <span style={{ color: '#ba372a' }}>Email:</span> {email || '{{email}}'}
+                          </div>
+                          <div style={{ paddingLeft: '40px', fontSize: '14pt', fontFamily: 'Arial Black, sans-serif' }}>
+                            <span style={{ color: '#ba372a' }}>Phone:</span> {phone || '{{phone}}'}
+                          </div>
+                          <div style={{ paddingLeft: '40px', fontSize: '14pt', fontFamily: 'Arial Black, sans-serif' }}>
+                            <span style={{ color: '#ba372a' }}>Message:</span> {message || '{{message}}'}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {activeContentTab === 'mobile' && (
+                      <div
+                        style={{
+                          width: '700px',
+                          height: '300px',
+                          border: '10px solid #ccc',
+                          borderRadius: '30px',
+                          overflow: 'hidden',
+                          position: 'relative',
+                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            border: '1px solid #000',
+                            borderRadius: '10px',
+                            backgroundColor: '#f9f9f9',
+                            padding: '10px',
+                            overflow: 'hidden',
+                          }}
+                        >
+                          <div style={{ height: '100%', overflowY: 'auto', paddingRight: '10px', boxSizing: 'content-box' }}>
+                            <div style={{ fontSize: '16pt', fontFamily: 'Arial Black, sans-serif' }}>
+                              <strong>Hello!</strong>
+                            </div>
+                            <div style={{ fontSize: '14pt', fontFamily: 'Arial Black, sans-serif', marginTop: '10px' }}>
+                              Thank you for your message! You will receive a response shortly.
+                            </div>
+                            <div style={{ fontSize: '14pt', fontFamily: 'Arial Black, sans-serif', marginTop: '10px' }}>
+                              <strong>Details:</strong>
+                            </div>
+                            <div style={{ paddingTop: '5px', fontSize: '12pt', fontFamily: 'Arial Black, sans-serif' }}>
+                              <span style={{ color: '#ba372a' }}>Name:</span> {name || '{{name}}'}
+                            </div>
+                            <div style={{ paddingTop: '5px', fontSize: '12pt', fontFamily: 'Arial Black, sans-serif' }}>
+                              <span style={{ color: '#ba372a' }}>Email:</span> {email || '{{email}}'}
+                            </div>
+                            <div style={{ paddingTop: '5px', fontSize: '12pt', fontFamily: 'Arial Black, sans-serif' }}>
+                              <span style={{ color: '#ba372a' }}>Phone:</span> {phone || '{{phone}}'}
+                            </div>
+                            <div style={{ paddingTop: '5px', fontSize: '12pt', fontFamily: 'Arial Black, sans-serif' }}>
+                              <span style={{ color: '#ba372a' }}>Message:</span> {message || '{{message}}'}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
-          )}
-        </div>
-      </div>
-    </div>
-</div>
-
 
 
     <div style={{ marginLeft: '20px', marginBottom: '30px', border: '1px solid #ccc', borderRadius: '8px', padding: '20px' }}>
@@ -411,8 +360,7 @@ const CreateTemplatePage: React.FC = () => {
       onChange={(e) => setSelectedTemplate(e.target.value)} 
       style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ccc', width: '50%' }}
     >
-      <option value="" disabled>Select the templates</option> {/* Visible prompt for users */}
-      {/* Add your options here when available */}
+      <option value="" disabled>Select the templates</option> 
     </select>
      
     <div style={{ border: '1px solid #ccc', padding: '8px', borderRadius: '4px', marginBottom: '10px', height: '70px', marginTop: '10px', width: '620px', backgroundColor: '#c7d1c9' }}>

@@ -7,7 +7,7 @@ const Link1Page: React.FC = () => {
   const router = useRouter(); 
 
   const handleCreateTemplate = () => {
-    router.push('/create-template'); // Yönlendirme
+    router.push('/create-template'); 
   };
 
   return (

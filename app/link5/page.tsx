@@ -13,7 +13,7 @@ const Link5Page: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('YOUR_API_ENDPOINT_HERE'); // Replace with your API endpoint
+      const response = await fetch('YOUR_API_ENDPOINT_HERE'); 
       if (!response.ok) throw new Error('Failed to fetch events');
       const data = await response.json();
       setEvents(data);
